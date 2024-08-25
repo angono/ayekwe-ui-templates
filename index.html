@@ -63,7 +63,42 @@
 
           <!-- Dropdown menu -->
           <div class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown">
-            {% include 'base/snippets/account_menu.html' %}
+
+  <div class="py-3 px-4">
+    <span class="block text-sm font-semibold text-gray-900 dark:text-white">@{{request.user.username}}</span>
+    <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{request.user.email}}</span>
+  </div>
+  <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+    <li>
+      <a href="{% url 'profile' %}" class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">{% trans 'My profile' %}</a>
+    </li>
+    <li>
+      <a href="{% url 'settings' %}" class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">{% trans 'Settings' %}</a>
+    </li>
+  </ul>
+  <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+    <li>
+      <a href="{% url 'bookmarks_list' %}" class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><svg class="mr-2 w-5 h-5 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 21-5-4-5 4V3.889a.92.92 0 0 1 .244-.629.808.808 0 0 1 .59-.26h8.333a.81.81 0 0 1 .589.26.92.92 0 0 1 .244.63V21Z"/></svg>{% trans 'Bookmarks' %}</a>
+    </li>
+    <li>
+      <a href="{% url 'notifications_list' %}" class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+      <svg class="mr-2 w-5 h-5 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17h6l3 3v-3h2V9h-2M4 4h11v8H9l-3 3v-3H4V4Z"/></svg>{% trans 'Notifications' %}</a>
+    </li>
+    <li>
+      <a href="{% url 'report_problem' %}" class="flex justify-between items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+        <span class="flex items-center"><svg class="mr-2 w-5 h-5 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 14v7M5 4.971v9.541c5.6-5.538 8.4 2.64 14-.086v-9.54C13.4 7.61 10.6-.568 5 4.97Z"/></svg>{% trans 'Report a problem' %}</span><svg class="w-2.5 h-2.5 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/></svg>
+      </a>
+    </li>
+  </ul>
+  <ul class="py-1 text-gray-500 dark:text-gray-400" aria-labelledby="dropdown">
+    <li>
+      <form action="{% url 'logout' %}" method="POST">
+        {% csrf_token %}
+        <button class="block py-2 w-full px-4 text-sm text-start hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" type="submit" role="menuitem">{% trans 'Logout' %}</button>
+      </form>
+    </li>
+  </ul>
+
           </div>
         </div>
       </div>
@@ -77,10 +112,10 @@
           <!-- author -->
           <div class="items-center">
             <div class="flex">
-              <a href="#" class="flex w-full">
+              <a href="profile.html" class="flex w-full">
                 <img src="static/logo.png" alt="username" class="w-10 h-10 rounded-lg">
                 <div class="ms-3 text-sm font-normal">
-                  <h3 class="inline-flex mb-1 text-sm font-semibold text-white">Angono</h3>
+                  <h3 class="inline-flex text-sm font-semibold text-white">@Angono</h3>
                   <p class="text-sm text-gray-400">Feb. 22, 2024 • <span class="text-blue-500">#Public</span></p>
                 </div>
               </a>
@@ -90,9 +125,9 @@
 
           <!-- content -->
           <a href="detail.html" class="">
-            <div class="py-2 text-gray-300 font-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+            <div class="py-2 text-white font-light">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
 
-            <span class="text-blue-500">#Ayekwe, #RCA236, #Bangui</span>
+            <span class="text-blue-500">#Ayekwe #RCA236 #Bangui</span>
 
             <img class="mx-auto w-full mt-3 rounded" src="static/01.jpg"/>
           </a>
@@ -120,7 +155,7 @@
               <a href="#" class="flex w-full">
                 <img src="static/logo.png" alt="username" class="w-10 h-10 rounded-lg">
                 <div class="ms-3 text-sm font-normal">
-                  <h3 class="inline-flex mb-1 text-sm font-semibold text-white">Angono</h3>
+                  <h3 class="inline-flex text-sm font-semibold text-white">@Ayekwe</h3>
                   <p class="text-sm text-gray-400">Feb. 22, 2024 • <span class="text-blue-500">#Public</span></p>
                 </div>
               </a>
@@ -160,7 +195,7 @@
               <a href="#" class="flex w-full">
                 <img src="static/logo.png" alt="username" class="w-10 h-10 rounded-lg">
                 <div class="ms-3 text-sm font-normal">
-                  <h3 class="inline-flex mb-1 text-sm font-semibold text-white">Angono</h3>
+                  <h3 class="inline-flex text-sm font-semibold text-white">@Daxemare</h3>
                   <p class="text-sm text-gray-400">Feb. 22, 2024 • <span class="text-blue-500">#Public</span></p>
                 </div>
               </a>
@@ -200,7 +235,7 @@
               <a href="#" class="flex w-full">
                 <img src="static/logo.png" alt="username" class="w-10 h-10 rounded-lg">
                 <div class="ms-3 text-sm font-normal">
-                  <h3 class="inline-flex mb-1 text-sm font-semibold text-white">Angono</h3>
+                  <h3 class="inline-flex text-sm font-semibold text-white">@Ayekwe</h3>
                   <p class="text-sm text-gray-400">Feb. 22, 2024 • <span class="text-blue-500">#Public</span></p>
                 </div>
               </a>
@@ -235,9 +270,6 @@
 
         
       </div>
-
-              <div class="mt-60" />
-
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
