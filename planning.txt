@@ -1,0 +1,114 @@
+AZOKWE PROJECT
+
+Technologies
+	Frontend: [HTML, CSS, JavaScript]
+	Backend: [Python, Django, PostgresSQL]
+	Image Storage: [Amazon s3]
+
+HTML Pages
+	index.html [not yet]
+	detail.html [not yet]
+	profile.html [not yet]
+	form.html [not yet]
+	about.html [not yet]
+	faqs.html [not yet]
+
+
+Content Colors
+	Background: [text-white]
+	Title text: [text-black]
+	Subtitle text: [text-gray-700]
+	Link text: [text-blue-600]
+	Paragraph: [text-gray-700]
+
+
+Content Sizes and Fonts
+	Title text: [text-lg, sm:text-2xl, font-bold]
+	Subtitle: [text-md, font-semibold]
+	Link text: [default size only, font-medium]
+	Paragraph: [default size only, font-medium]
+	Image: [w-full, h-auto]
+
+
+Home
+Explore
+Pages
+Families
+Sponsorship
+Profile
+Language
+FAQs
+About Us
+Privacy
+Terms of service
+
+
+
+
+
+<div class="relative bg-gray-50 py-6">
+  <!-- Left Scroll Button -->
+  <button
+    id="scroll-left"
+    class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white text-gray-600 p-2 rounded-full shadow hover:bg-gray-200 z-10">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+
+  <!-- Right Scroll Button -->
+  <button
+    id="scroll-right"
+    class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white text-gray-600 p-2 rounded-full shadow hover:bg-gray-200 z-10">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+
+  <!-- Horizontal Scrolling Categories -->
+  <div id="stories-container" class="flex space-x-4 overflow-x-scroll scrollbar-hide px-8">
+    <!-- Category Items -->
+    <div class="flex-shrink-0 bg-white text-gray-600 px-6 py-3 rounded-lg shadow hover:bg-gray-100 cursor-pointer">
+      For you
+    </div>
+    <div class="flex-shrink-0 bg-white text-gray-600 px-6 py-3 rounded-lg shadow hover:bg-gray-100 cursor-pointer">
+      Following
+    </div>
+    <div class="flex-shrink-0 bg-white text-gray-600 px-6 py-3 rounded-lg shadow hover:bg-gray-100 cursor-pointer">
+      Data Visualization
+    </div>
+    <div class="flex-shrink-0 bg-white text-gray-600 px-6 py-3 rounded-lg shadow hover:bg-gray-100 cursor-pointer">
+      Freelancing
+    </div>
+    <div class="flex-shrink-0 bg-white text-gray-600 px-6 py-3 rounded-lg shadow hover:bg-gray-100 cursor-pointer">
+      Coding
+    </div>
+    <div class="flex-shrink-0 bg-white text-gray-600 px-6 py-3 rounded-lg shadow hover:bg-gray-100 cursor-pointer">
+      React
+    </div>
+    <div class="flex-shrink-0 bg-white text-gray-600 px-6 py-3 rounded-lg shadow hover:bg-gray-100 cursor-pointer">
+      Design
+    </div>
+    <div class="flex-shrink-0 bg-white text-gray-600 px-6 py-3 rounded-lg shadow hover:bg-gray-100 cursor-pointer">
+      Technology
+    </div>
+    <!-- Add more items as needed -->
+  </div>
+</div>
+
+<!-- JavaScript for Scroll Functionality -->
+<script>
+  document.getElementById('scroll-left').addEventListener('click', () => {
+    document.getElementById('stories-container').scrollBy({
+      left: -200, // Adjust scrolling distance
+      behavior: 'smooth'
+    });
+  });
+
+  document.getElementById('scroll-right').addEventListener('click', () => {
+    document.getElementById('stories-container').scrollBy({
+      left: 200, // Adjust scrolling distance
+      behavior: 'smooth'
+    });
+  });
+</script>
