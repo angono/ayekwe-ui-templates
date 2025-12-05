@@ -1,808 +1,279 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ayekwe - Homepage</title>
-  <!-- Tailwind CSS via CDN -->
+  <title>Product Hunt — Tailwind Replica (Refined)</title>
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Include GLightbox CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
-
-  <style type="text/css">
-    /* Hide scrollbar in Chrome, Safari, and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Hide scrollbar in IE, Edge, and Firefox */
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
+  <style>
+    :root { --accent: #ff5a4a; }
   </style>
-
 </head>
-<body class="bg-indigo-50 text-black text-sm md:text-base font-sans antialiased md:subpixel-antialiased">
-  <!-- Navbar -->
-<!-- 
+<body class="bg-white text-gray-800 font-sans antialiased">
+  <header class="border-b bg-white sticky top-0 w-full z-30">
+    <nav class="max-w-screen px-6 py-4 flex items-center justify-between">
+      <h1 class="text-2xl font-extrabold">
+        <span class="text-orange-600">Aye</span><span>kwe</span>
+      </h1>
 
-  <nav class="fixed left-0 right-0 top-0 z-50 bg-indigo-50 border-b px-2 md:px-4 py-2">
-    <div class="flex flex-wrap justify-between items-center">
-      <div class="flex justify-start items-center">
-        <button
-          data-drawer-target="drawer-navigation"
-          data-drawer-toggle="drawer-navigation"
-          aria-controls="drawer-navigation"
-          class="p-2 mr-2 md:hidden text-green-600 rounded-lg cursor-pointer hover:text-white hover:bg-green-600">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
-          </svg>
+      <div class="flex items-center gap-4">
+        <button class="items-center border border-gray-200 rounded-full p-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 md:size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg></button>
+
+        <button class="items-center border border-gray-200 rounded-full p-2 relative"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 md:size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" /></svg>
+          <span class="absolute -top-1 -right-1 text-xs bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center">8</span>
         </button>
 
-        <a href="index.html" class="flex items-center gap-2">
-          <img src="static/green-logo.png" alt="Ayekwe" class="w-8 h-8 rounded-lg">
-          <span class="text-xl font-bold">Ayekwe</span>
-        </a>
+        <button class="items-center border border-gray-200 rounded-full p-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 md:size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" /></svg></button>
 
-        <form action="#" method="GET" class="hidden md:block md:pl-3">
-          <div class="relative w-64">
-            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-green-600"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+      </div>
+    </nav>
+  </header>
+
+
+  <main class="max-w-6xl mx-auto px-2 md:px-6 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+      <!-- left / center content -->
+      <section class="col-span-1 lg:col-span-2 space-y-4">
+
+        <div class="overflow-x-auto pb-3">
+          <div class="flex gap-4 items-center">
+            <!-- Story Item Repeat -->
+            <div class="flex flex-col items-center text-center w-20">
+              <div class="relative">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-orange-400 to-pink-500 p-[2px]">
+                  <img src="static/01.webp" class="w-full h-full rounded-full object-cover border-2 border-white" />
+                </div>
+                <div class="absolute -bottom-1 -right-1 bg-orange-500 text-white rounded-full w-6 h-6 flex items-center justify-center border-2 border-white">+</div>
+              </div>
+              <div class="text-xs mt-2 text-gray-600">Add Story</div>
             </div>
-            <input type="text" name="search" id="topbar-search" class="border border-gray-400 bg-white text-sm rounded-full px-4 py-1.5 text-black w-72 outline-green-600 block w-full pl-10" placeholder="Search..."/>
-          </div>
-        </form>
-      </div>
 
-      <div class="flex items-center lg:order-2 space-x-2 md:space-x-4">
-        <a href="#" type="button" class="flex hidden md:inline-flex bg-green-600 hover:bg-green-800 text-white font-bold px-3 py-1.5 rounded-full transition-all duration-300 uppercase"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg><span class="ml-2">New Post</span></a>
+            <div class="flex flex-col items-center text-center w-20">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-orange-400 to-pink-500 p-[2px]">
+                <img src="static/02.webp" class="w-full h-full rounded-full object-cover border-2 border-white" />
+              </div>
+              <div class="text-xs mt-2 text-gray-600">Robert</div>
+            </div>
 
-        <a href="#" type="button" class="flex font-bold p-1.5 rounded-full transition-all duration-300 hover:text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg></a>
+            <!-- Add more story items as needed -->
+            <div class="flex flex-col items-center text-center w-20">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-orange-400 to-pink-500 p-[2px]">
+                <img src="static/03.webp" class="w-full h-full rounded-full object-cover border-2 border-white" />
+              </div>
+              <div class="text-xs mt-2 text-gray-600">Robert</div>
+            </div>
 
-        <a href="#" type="button" class="flex font-bold p-1.5 rounded-full transition-all duration-300 hover:text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802" /></svg></a>
+            <div class="flex flex-col items-center text-center w-20">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-orange-400 to-pink-500 p-[2px]">
+                <img src="static/04.webp" class="w-full h-full rounded-full object-cover border-2 border-white" />
+              </div>
+              <div class="text-xs mt-2 text-gray-600">Robert</div>
+            </div>
 
-        <a href="#" type="button" class="flex font-bold p-1.5 rounded-full transition-all duration-300 hover:text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" /></svg></a>
+            <div class="flex flex-col items-center text-center w-20">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-orange-400 to-pink-500 p-[2px]">
+                <img src="static/05.webp" class="w-full h-full rounded-full object-cover border-2 border-white" />
+              </div>
+              <div class="text-xs mt-2 text-gray-600">Robert</div>
+            </div>
 
-        <button type="button" class="p-0 bg-green-600 rounded-full transition-all duration-300" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
-          <img class="w-8 h-8 rounded-full" src="static/avatar.webp" alt="user photo"/>
-        </button>
-      </div>
-    </div>
-  </nav> 
+            <div class="flex flex-col items-center text-center w-20">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-orange-400 to-pink-500 p-[2px]">
+                <img src="static/06.webp" class="w-full h-full rounded-full object-cover border-2 border-white" />
+              </div>
+              <div class="text-xs mt-2 text-gray-600">Robert</div>
+            </div>
 
--->
+            <div class="flex flex-col items-center text-center w-20">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-orange-400 to-pink-500 p-[2px]">
+                <img src="static/07.webp" class="w-full h-full rounded-full object-cover border-2 border-white" />
+              </div>
+              <div class="text-xs mt-2 text-gray-600">Robert</div>
+            </div>
 
-  <!-- Sidebar -->
-  <aside class="fixed top-0 left-0 z-40 w-72 h-screen bg-indigo-50 transition-transform -translate-x-full md:translate-x-0" aria-label="Sidenav" id="drawer-navigation">
-    <div class="overflow-y-auto pt-3 pb-5 px-5 h-full items-start space-y-6 text-sm">
+            <div class="flex flex-col items-center text-center w-20">
+              <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-orange-400 to-pink-500 p-[2px]">
+                <img src="static/08.webp" class="w-full h-full rounded-full object-cover border-2 border-white" />
+              </div>
+              <div class="text-xs mt-2 text-gray-600">Robert</div>
+            </div>
 
-      <div class="flex justify-start items-center space-x-2 transition-all duration-300 hover:translate-x-1 flex-shrink-0">
-        <img src="static/green-logo.png" class="w-10 h-10 rounded-lg">
-        <a href="profile.html" class="font-semibold hover:text-green-600">
-          <h1 class="text-lg mb-0">Ayekwe</h1>
-          <p class="text-xs text-gray-600">Connect and share</p>
-        </a>
-      </div>
-
-      <div>
-        <ul class="space-y-3.5 transition-all duration-75">
-          <li><a href="index.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>Home</a></li>
-
-          <li><a href="trending.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5-3.9 19.5m-2.1-19.5-3.9 19.5" /></svg>Explore</a></li>
-
-          <li><a href="new-songs.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" /></svg> Pages</a></li>
-
-          <li><a href="artists.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" /></svg>People</a></li>
-
-          <li><a href="trending.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" /></svg> Notifications</a></li>
-
-          <li><a href="playlist.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>Management</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <p class="text-gray-400 uppercase text-xs font-semibold mb-2">Account</p>
-        <ul class="space-y-3.5 transition-all duration-75">
-          <li><a href="profile.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg> Profile</a></li>
-
-          <li><a href="profile.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" /></svg> Followers</a></li>
-
-          <li><a href="profile.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" /></svg> Bookmarks</a></li>
-
-          <li><a href="profile.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg> Settings</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <p class="text-gray-400 uppercase text-xs font-semibold mb-2">Help & Support</p>
-        <ul class="space-y-3.5 transition-all duration-75">
-          <li><a href="profile.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" /></svg>FAQs</a></li>
-
-          <li><a href="profile.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5" /></svg>Report a Problem</a></li>
-
-          <li><a href="profile.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" /></svg> Privacy Policy</a></li>
-
-          <li><a href="profile.html" class="flex group items-center gap-2 hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" /></svg> Terms & Conditions</a></li>
-        </ul>
-      </div>
-
-    </div>
-  </aside>
-
-  <!-- Main -->
-  <main class="px-0 md:px-4 md:ml-72 h-auto pb-20">
-
-<nav class="left-0 right-0 top-0 bg-indigo-50 border-b px-2 py-2 mb-2">
-  <div class="flex flex-wrap justify-between items-center">
-    <div class="flex justify-start items-center">
-      <button
-        data-drawer-target="drawer-navigation"
-        data-drawer-toggle="drawer-navigation"
-        aria-controls="drawer-navigation"
-        class="p-2 mr-2 md:hidden text-green-600 rounded-lg cursor-pointer hover:text-white hover:bg-green-600">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
-        </svg>
-      </button>
-
-      <form action="#" method="GET" class="hidden md:block md:pl-3">
-        <div class="relative w-64">
-          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 text-green-600"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
-          </div>
-          <input type="text" name="search" id="topbar-search" class="border border-gray-400 bg-white text-sm rounded-xl px-4 py-1.5 text-black w-72 outline-green-600 block w-full pl-10" placeholder="Search..."/>
-        </div>
-      </form>
-    </div>
-
-    <div class="flex items-center lg:order-2 space-x-2 md:space-x-4">
-      <a href="#" type="button" class="flex bg-green-600 hover:bg-green-800 text-white font-bold px-3 py-1.5 rounded-full transition-all duration-300 uppercase"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg><span class="ml-2 hidden md:block">New Post</span></a>
-
-      <a href="#" type="button" class="flex font-bold p-1.5 rounded-full transition-all duration-300 hover:text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg></a>
-
-      <a href="#" type="button" class="flex font-bold p-1.5 rounded-full transition-all duration-300 hover:text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802" /></svg></a>
-
-      <a href="#" type="button" class="flex font-bold p-1.5 rounded-full transition-all duration-300 hover:text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" /></svg></a>
-
-      <button type="button" class="p-0 bg-green-600 rounded-full transition-all duration-300" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
-        <img class="w-8 h-8 rounded-full object-cover" src="static/avatar.webp" alt="user photo"/>
-      </button>
-    </div>
-  </div>
-</nav> 
-
-    <!-- Post contnets -->
-    <section class="w-full">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="col-span-1 md:col-span-2 space-y-2 md:px-14">
-<div class="relative items-center px-4 py-5 bg-white md:rounded-2xl shadow overflow-hidden">
-  <div class="flex items-center justify-between font-bold mb-4">
-    <h2 class="text-lg font-bold">Stories</h2>
-    <a href="#" class="text-green-400 text-sm hover:text-green-500">Create story</a>
-  </div>
-
-  <!-- Left Scroll Button -->
-  <button
-    id="scroll-left"
-    class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white text-green-600 p-2 rounded-full shadow hover:bg-green-100 z-10">
-    <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-  </button>
-
-  <!-- Right Scroll Button -->
-  <button
-    id="scroll-right"
-    class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white text-green-600 p-2 rounded-full shadow hover:bg-green-100 z-10">
-    <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-  </button>
-
-  <!-- Music Section -->
-  <div id="stories-container" class="flex space-x-3 overflow-x-scroll scrollbar-hide no-scrollbar">
-    <div class="relative group overflow-hidden rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-media cursor-pointer flex-shrink-0 w-28 h-48 sm:h-52">
-      <a href="static/01.webp" class="relative glightbox">
-        <img src="static/01.webp" alt="caption" class="w-28 h-36 sm:h-44 rounded-lg object-cover">
-        <div class="absolute top-2 left-2">
-          <img src="static/avatar.webp" alt="username" class="w-10 h-10 rounded-full border-2 border-green-300">
-        </div>
-
-        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/70 rounded-full flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6  text-green-600 fill-green-600"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z" clip-rule="evenodd" /></svg></span>
-      </a>
-      <p class="mt-2 text-center text-sm font-semibold truncate">Derkos Tirel</p>
-    </div>
-
-    <div class="relative group overflow-hidden rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-media cursor-pointer flex-shrink-0 w-28 h-48 sm:h-52">
-      <a href="static/02.webp" class="relative glightbox">
-        <img src="static/02.webp" alt="caption" class="w-28 h-36 sm:h-44 rounded-lg object-cover">
-        <div class="absolute top-2 left-2">
-          <img src="static/avatar.webp" alt="username" class="w-10 h-10 rounded-full border-2 border-green-300">
-        </div>
-
-        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/70 rounded-full flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6  text-green-600 fill-green-600"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z" clip-rule="evenodd" /></svg></span>
-      </a>
-      <p class="mt-2 text-center text-sm font-semibold truncate">Derkos Tirel</p>
-    </div>
-
-    <div class="relative group overflow-hidden rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-media cursor-pointer flex-shrink-0 w-28 h-48 sm:h-52">
-      <a href="static/03.webp" class="relative glightbox">
-        <img src="static/03.webp" alt="caption" class="w-28 h-36 sm:h-44 rounded-lg object-cover">
-        <div class="absolute top-2 left-2">
-          <img src="static/avatar.webp" alt="username" class="w-10 h-10 rounded-full border-2 border-green-300">
-        </div>
-
-        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/70 rounded-full flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6  text-green-600 fill-green-600"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z" clip-rule="evenodd" /></svg></span>
-      </a>
-      <p class="mt-2 text-center text-sm font-semibold truncate">Derkos Tirel</p>
-    </div>
-
-    <div class="relative group overflow-hidden rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-media cursor-pointer flex-shrink-0 w-28 h-48 sm:h-52">
-      <a href="static/04.webp" class="relative glightbox">
-        <img src="static/04.webp" alt="caption" class="w-28 h-36 sm:h-44 rounded-lg object-cover">
-        <div class="absolute top-2 left-2">
-          <img src="static/avatar.webp" alt="username" class="w-10 h-10 rounded-full border-2 border-green-300">
-        </div>
-
-        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/70 rounded-full flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6  text-green-600 fill-green-600"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z" clip-rule="evenodd" /></svg></span>
-      </a>
-      <p class="mt-2 text-center text-sm font-semibold truncate">Derkos Tirel</p>
-    </div>
-
-    <div class="relative group overflow-hidden rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-media cursor-pointer flex-shrink-0 w-28 h-48 sm:h-52">
-      <a href="static/05.webp" class="relative glightbox">
-        <img src="static/05.webp" alt="caption" class="w-28 h-36 sm:h-44 rounded-lg object-cover">
-        <div class="absolute top-2 left-2">
-          <img src="static/avatar.webp" alt="username" class="w-10 h-10 rounded-full border-2 border-green-300">
-        </div>
-
-        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/70 rounded-full flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6  text-green-600 fill-green-600"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z" clip-rule="evenodd" /></svg></span>
-      </a>
-      <p class="mt-2 text-center text-sm font-semibold truncate">Derkos Tirel</p>
-    </div>
-
-    <div class="relative group overflow-hidden rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-media cursor-pointer flex-shrink-0 w-28 h-48 sm:h-52">
-      <a href="static/06.webp" class="relative glightbox">
-        <img src="static/06.webp" alt="caption" class="w-28 h-36 sm:h-44 rounded-lg object-cover">
-        <div class="absolute top-2 left-2">
-          <img src="static/avatar.webp" alt="username" class="w-10 h-10 rounded-full border-2 border-green-300">
-        </div>
-
-        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/70 rounded-full flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6  text-green-600 fill-green-600"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z" clip-rule="evenodd" /></svg></span>
-      </a>
-      <p class="mt-2 text-center text-sm font-semibold truncate">Derkos Tirel</p>
-    </div>
-
-    <div class="relative group overflow-hidden rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-media cursor-pointer flex-shrink-0 w-28 h-48 sm:h-52">
-      <a href="static/07.webp" class="relative glightbox">
-        <img src="static/07.webp" alt="caption" class="w-28 h-36 sm:h-44 rounded-lg object-cover">
-        <div class="absolute top-2 left-2">
-          <img src="static/avatar.webp" alt="username" class="w-10 h-10 rounded-full border-2 border-green-300">
-        </div>
-
-        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/70 rounded-full flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6  text-green-600 fill-green-600"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z" clip-rule="evenodd" /></svg></span>
-      </a>
-      <p class="mt-2 text-center text-sm font-semibold truncate">Derkos Tirel</p>
-    </div>
-
-    <div class="relative group overflow-hidden rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-media cursor-pointer flex-shrink-0 w-28 h-48 sm:h-52">
-      <a href="static/08.webp" class="relative glightbox">
-        <img src="static/08.webp" alt="caption" class="w-28 h-36 sm:h-44 rounded-lg object-cover">
-        <div class="absolute top-2 left-2">
-          <img src="static/avatar.webp" alt="username" class="w-10 h-10 rounded-full border-2 border-green-300">
-        </div>
-
-        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/70 rounded-full flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6  text-green-600 fill-green-600"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z" clip-rule="evenodd" /></svg></span>
-      </a>
-      <p class="mt-2 text-center text-sm font-semibold truncate">Derkos Tirel</p>
-    </div>
-
-    <div class="relative group overflow-hidden rounded-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-media cursor-pointer flex-shrink-0 w-28 h-48 sm:h-52">
-      <a href="static/09.webp" class="relative glightbox">
-        <img src="static/09.webp" alt="caption" class="w-28 h-36 sm:h-44 rounded-lg object-cover">
-        <div class="absolute top-2 left-2">
-          <img src="static/avatar.webp" alt="username" class="w-10 h-10 rounded-full border-2 border-green-300">
-        </div>
-
-        <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/70 rounded-full flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6  text-green-600 fill-green-600"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" /><path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z" clip-rule="evenodd" /></svg></span>
-      </a>
-      <p class="mt-2 text-center text-sm font-semibold truncate">Derkos Tirel</p>
-    </div>
-
-  </div>
-</div>
-
-<!-- post 1 -->
-<div class="bg-white md:rounded-xl shadow overflow-hidden">
-  <div class="p-4 space-y-4">
-    <!-- Post Header -->
-    <div class="flex items-start justify-between rounded-xl transition-colors duration-300">
-      <div class="flex items-center space-x-3">
-        <div class="flex-shrink-0">
-          <img class="w-10 h-10 object-cover object-center rounded-xl border-2 border-white transition-transform duration-300 group-hover:scale-105" src="static/avatar.webp" alt="username">
-        </div>
-        <div>
-          <div class="flex items-center space-x-2">
-            <a href="profile.html" class="font-bold text-sm hover:text-green-600">Derkos Tirel</a>
-            <span class="bg-green-100 text-green-800 rounded-md px-2 py-0.5 text-xs">
-              <a href="#">Repost</a>
-            </span>
-          </div>
-          <div class="flex items-center text-gray-500 text-sm">
-            <span>19 hours, 14 minutes</span>
-            <span class="mx-1">•</span>
-            <span>Public</span>
           </div>
         </div>
-      </div>
-      
-      <!-- Dropdown Button -->
-      <div class="relative">
-        <button id="dropdownButton" data-dropdown-toggle="dropdownDots" data-dropdown-placement="bottom-start" class="p-2 text-gray-500 hover:text-gray-700 hover:bg-green-100 rounded-full transition-colors duration-200 font-bold">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" /></svg>
-        </button>
-        
-        <!-- Dropdown Menu -->
-        <div id="dropdownDots" class="shadow-2xl hidden z-50 w-48 bg-gray-50 divide-y divide-gray-100 rounded">
-          <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownButton">
-            <li><a href="#" class="flex gap-2 items-center px-4 py-2 hover:bg-gray-100 transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" /></svg>Save post</a></li>
 
-            <button type="button" onclick="copyPostURL('{{post.get_absolute_url}}');" class="flex gap-2 items-center px-4 py-2 hover:bg-gray-100 transition-colors duration-200 w-full text-start"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" /></svg>Copy link</button>
-
-            <li><a href="#" class="flex gap-2 items-center px-4 py-2 hover:bg-gray-100 transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75" /></svg>Repost</a></li>
-
-            <li><a href="#" class="flex gap-2 items-center px-4 py-2 hover:bg-gray-100 transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0 2.77-.693a9 9 0 0 1 6.208.682l.108.054a9 9 0 0 0 6.086.71l3.114-.732a48.524 48.524 0 0 1-.005-10.499l-3.11.732a9 9 0 0 1-6.085-.711l-.108-.054a9 9 0 0 0-6.208-.682L3 4.5M3 15V4.5" /></svg>Report post</a></li>
-
-            <li><a href="#" class="flex gap-2 items-center px-4 py-2 hover:bg-gray-100 transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg>Update post</a></li>
-
-            <li><a href="#" class="flex gap-2 items-center px-4 py-2 hover:bg-gray-100 transition-colors duration-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>Delete post</a></li>
-          </ul>
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-semibold">Products</h2>
+          <button class="text-sm text-pink-500">View All</button>
         </div>
-      </div>
-    </div>
 
-    <!-- Post Content -->
-    <div class="text-gray-700">
-      <a href="detail.html" class="line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo molestie ultrices. Nam felis urna, convallis vitae risus semper, ultricies varius tortor. Etiam suscipit aliquam neque, a euismod orci molestie sed...</a>
-    </div>
-    
-    <!-- Media -->
-    <div class="rounded overflow-hidden bg-gray-100 w-full">
-      <a href="detail.html" class="block w-full h-full">
-        <img class="w-full object-cover aspect-auto sm:aspect-[16/9]" src="static/01.webp" alt="image" loading="eager|lazy"/>
-      </a>
-    </div>
-  
-    <!-- Stats -->
-    <div class="py-3 px-3 flex items-center xs:text-xs sm:text-sm text-gray-500 space-x-3 border-t border-b border-gray-200">
-      <span>12k likes</span>
-      <span>120 comments</span>
-      <span>55 reposts</span>
-    </div>
+        <div class="overflow-x-auto">
+          <div class="flex gap-4 pb-4">
+            <div class="min-w-[300px] rounded-xl overflow-hidden shadow-md relative">
+              <img src="static/01.webp" class="w-full h-44 object-cover" />
+              <div class="absolute left-3 top-3 bg-black/40 text-white text-xs px-2 py-1 rounded">▶ 60.7k</div>
+              <div class="absolute right-3 bottom-3 bg-red-500 text-white text-xs px-2 py-1 rounded">Live</div>
+              <div class="absolute bottom-3 left-3 text-white font-semibold text-lg drop-shadow-md">Good vibes, great</div>
+            </div>
 
-    <!-- Actions -->
-    <div class="flex justify-around">
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>12k</button>
+            <div class="min-w-[300px] rounded-xl overflow-hidden shadow-md relative">
+              <img src="static/02.webp" class="w-full h-44 object-cover" />
+              <div class="absolute left-3 top-3 bg-black/40 text-white text-xs px-2 py-1 rounded">▶ 60.7k</div>
+              <div class="absolute right-3 bottom-3 bg-red-500 text-white text-xs px-2 py-1 rounded">Live</div>
+              <div class="absolute bottom-3 left-3 text-white font-semibold text-lg drop-shadow-md">Good vibes, great</div>
+            </div>
 
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" /></svg>120</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" /></svg>40</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" /></svg>35</button>
-    </div>
-  </div>
-</div>
-
-<!-- post 2 -->
-<div class="bg-white md:rounded-xl shadow overflow-hidden">
-  <div class="p-3 sm:p-6 space-y-4">
-    <!-- Post Header -->
-    <div class="flex items-start justify-between rounded-xl transition-colors duration-300">
-      <div class="flex items-center space-x-3">
-        <div class="flex-shrink-0">
-          <img class="w-10 h-10 object-cover object-center rounded-xl border-2 border-white transition-transform duration-300 group-hover:scale-105" src="static/avatar.webp" alt="username">
-        </div>
-        <div>
-          <div class="flex items-center space-x-2">
-            <a href="profile.html" class="font-bold text-sm hover:text-green-600">Derkos Tirel</a>
-            <span class="bg-green-100 text-green-800 rounded-md px-2 py-0.5 text-xs">
-              <a href="#">Repost</a>
-            </span>
-          </div>
-          <div class="flex items-center text-gray-500 text-sm">
-            <span>19 hours, 14 minutes</span>
-            <span class="mx-1">•</span>
-            <span>Event</span>
+            <div class="min-w-[300px] rounded-xl overflow-hidden shadow-md relative">
+              <img src="static/03.webp" class="w-full h-44 object-cover" />
+              <div class="absolute left-3 top-3 bg-black/40 text-white text-xs px-2 py-1 rounded">▶ 60.7k</div>
+              <div class="absolute right-3 bottom-3 bg-red-500 text-white text-xs px-2 py-1 rounded">Live</div>
+              <div class="absolute bottom-3 left-3 text-white font-semibold text-lg drop-shadow-md">Good vibes, great</div>
+            </div>
           </div>
         </div>
-      </div>
-      
-      <!-- Dropdown Button -->
-      <div class="relative">
-        <button id="dropdownButton2" data-dropdown-toggle="dropdownDots2" data-dropdown-placement="bottom-start" class="p-2 text-gray-500 hover:text-gray-700 hover:bg-green-100 rounded-full transition-colors duration-200 font-bold">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" /></svg>
-        </button>
-        
-        <!-- Dropdown Menu -->
-        <div id="dropdownDots2" class="shadow-dropdown hidden z-50 w-48 bg-gray-50 divide-y divide-gray-100 rounded-lg">
-          <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownButton2">
-            <li><a href="#" class="flex px-4 py-2 hover:bg-green-50 transition-colors duration-200">Comment</a></li>
 
-            <li><a href="#" class="flex px-4 py-2 hover:bg-green-50 transition-colors duration-200">Repost</a></li>
 
-            <button type="button" onclick="copyPostURL('{{post.get_absolute_url}}');" class="block px-4 py-2 hover:bg-green-50 text-gray-700 transition-colors duration-200 w-full text-start">Copy link</button>
+        <h2 class="text-2xl font-semibold mb-6">Feed</h2>
 
-            <li><a href="" class="flex px-4 py-2 hover:bg-#green-50 transition-colors duration-200">Update this post</a></li>
+        <div class="space-y-4">
 
-            <li><a href="#" class="flex px-4 py-2 hover:bg-green-50 transition-colors duration-200">Delete this post</a></li>
-          </ul>
+          <article class="bg-gray-50 rounded-lg px-4 py-6 shadow-sm">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0">
+                <img src="static/01.webp" class="w-8 h-8 md:w-12 md:h-12 rounded-full hover:opacity-80 transition-opacity object-cover">
+              </div>
+              <div>
+                <div class="flex items-center space-x-2 mb-0">
+                  <span class="font-semibold text-gray-900 text-sm">Derkos Tirel</span>
+                  <span class="text-xs text-green-500">(Repost)</span>
+                </div>
+
+                <div class="mb-2 text-gray-500 text-sm hover:text-gray-700">5 hrs ago</div>
+
+                <div class="text-sm text-gray-600 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tempus ornare diam, eget tincidunt dui dignissim in. Fusce tempor, neque a placerat maximus, turpis lacus vulputate ipsum, ac faucibus quam mauris sed augue. Nam quis elit et nisi sollicitudin feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</div>
+
+                <div class="flex items-center justify-between mt-3 gap-3 text-xs text-gray-500">
+                  <button class="inline-flex items-center gap-2 text-orange-600">
+                    <i data-lucide="heart" class="w-4 h-4"></i>
+                    <span>200k</span>
+                  </button>
+
+                  <button class="inline-flex items-center gap-2 text-orange-600">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    <span>450</span>
+                  </button>
+
+                  <button class="inline-flex items-center gap-2 text-orange-600">
+                    <i data-lucide="share" class="w-4 h-4"></i>
+                    <span>10k</span>
+                  </button>
+
+                  <button class="inline-flex items-center gap-2 text-orange-600">
+                    <i data-lucide="bookmark" class="w-4 h-4"></i>
+                  </button>
+
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="bg-gray-50 rounded-lg px-4 py-6 shadow-sm">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0">
+                <img src="static/01.webp" class="w-8 h-8 md:w-12 md:h-12 rounded-full hover:opacity-80 transition-opacity object-cover">
+              </div>
+              <div>
+                <div class="flex items-center space-x-2 mb-0">
+                  <span class="font-semibold text-gray-900 text-sm">Derkos Tirel</span>
+                  <span class="text-xs text-green-500">(Repost)</span>
+                </div>
+
+                <div class="mb-2 text-gray-500 text-sm hover:text-gray-700">5 hrs ago</div>
+
+                <div class="text-sm text-gray-600 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas tempus ornare diam, eget tincidunt dui dignissim in. Fusce tempor, neque a placerat maximus, turpis lacus vulputate ipsum, ac faucibus quam mauris sed augue. Nam quis elit et nisi sollicitudin feugiat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</div>
+
+                <div class="mb-3 cursor-pointer">
+                  <img src="static/02.webp" sizes="90vw" class="rounded-lg">
+                </div>
+
+                <div class="flex items-center justify-between mt-3 gap-3 text-xs text-gray-500">
+                  <button class="inline-flex items-center gap-2 text-orange-600">
+                    <i data-lucide="heart" class="w-4 h-4"></i>
+                    <span>200k</span>
+                  </button>
+
+                  <button class="inline-flex items-center gap-2 text-orange-600">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    <span>450</span>
+                  </button>
+
+                  <button class="inline-flex items-center gap-2 text-orange-600">
+                    <i data-lucide="share" class="w-4 h-4"></i>
+                    <span>10k</span>
+                  </button>
+
+                  <button class="inline-flex items-center gap-2 text-orange-600">
+                    <i data-lucide="bookmark" class="w-4 h-4"></i>
+                  </button>
+
+                </div>
+              </div>
+            </div>
+          </article>
+
         </div>
-      </div>
-    </div>
+      </section>
 
-    <!-- Post Content -->
-    <div class="text-gray-700">
-      <a href="detail.html" class="line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo molestie ultrices. Nam felis urna, convallis vitae risus semper, ultricies varius tortor. Etiam suscipit aliquam neque, a euismod orci molestie sed...</a>
-    </div>
-    
-    <!-- Card preview -->
-    <div class="preview-container mb-4">
-      <div class="w-full sm:flex border rounded-lg overflow-hidden bg-gray-100 transition-all">
-        <div class="flex-shrink-0 aspect-square w-full h-54 sm:h-32 sm:w-32">
-          <img src="static/05.webp" alt="title" class="object-cover object-center w-full h-full rounded-lg" loading="lazy">
-        </div>
-        <div class="p-4 flex-1">
-          <a href="#" target="_blank" class="font-semibold text-md hover:underline block">Ayekwe url link preview</a>
-          
-          <p class="text-sm text-gray-600 line-clamp-2 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo molestie ultrices.</p>
-          
-          <p class="text-xs text-gray-400 mt-1">ayekwe.com</p>
-        </div>
-      </div>
-    </div>
+      <!-- right sidebar -->
+      <aside class="space-y-6">
+        <h3 class="text-lg font-semibold">Trending Forum Threads</h3>
 
-  
-    <!-- Stats -->
-    <div class="py-3 px-3 flex items-center xs:text-xs lg:text-sm text-gray-500 space-x-3 border-t border-b border-gray-200">
-      <span>12k likes</span>
-      <span>120 comments</span>
-      <span>55 reposts</span>
-    </div>
-
-    <!-- Actions -->
-    <div class="flex justify-around">
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>12k</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" /></svg>120</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" /></svg>40</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" /></svg>35</button>
-    </div>
-  </div>
-</div>
-
-<!-- post 3 -->
-<div class="bg-white md:rounded-xl shadow overflow-hidden">
-  <div class="p-3 sm:p-6 space-y-4">
-    <!-- Post Header -->
-    <div class="flex items-start justify-between rounded-xl transition-colors duration-300">
-      <div class="flex items-center space-x-3">
-        <div class="flex-shrink-0">
-          <img class="w-10 h-10 object-cover object-center rounded-xl border-2 border-white transition-transform duration-300 group-hover:scale-105" src="static/avatar.webp" alt="username">
-        </div>
-        <div>
-          <div class="flex items-center space-x-2">
-            <a href="profile.html" class="font-bold text-sm hover:text-green-600">Derkos Tirel</a>
-            <span class="bg-green-100 text-green-800 rounded-md px-2 py-0.5 text-xs">
-              <a href="#">Repost</a>
-            </span>
-          </div>
-          <div class="flex items-center text-gray-500 text-sm">
-            <span>19 hours, 14 minutes</span>
-            <span class="mx-1">•</span>
-            <span>Public</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Dropdown Button -->
-      <div class="relative">
-        <button id="dropdownButton2" data-dropdown-toggle="dropdownDots2" data-dropdown-placement="bottom-start" class="p-2 text-gray-500 hover:text-gray-700 hover:bg-green-100 rounded-full transition-colors duration-200 font-bold">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" /></svg>
-        </button>
-        
-        <!-- Dropdown Menu -->
-        <div id="dropdownDots2" class="shadow-dropdown hidden z-50 w-48 bg-gray-50 divide-y divide-gray-100 rounded-lg">
-          <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownButton2">
-            <li><a href="#" class="flex px-4 py-2 hover:bg-green-50 transition-colors duration-200">Comment</a></li>
-
-            <li><a href="#" class="flex px-4 py-2 hover:bg-green-50 transition-colors duration-200">Repost</a></li>
-
-            <button type="button" onclick="copyPostURL('{{post.get_absolute_url}}');" class="block px-4 py-2 hover:bg-green-50 text-gray-700 transition-colors duration-200 w-full text-start">Copy link</button>
-
-            <li><a href="" class="flex px-4 py-2 hover:bg-#green-50 transition-colors duration-200">Update this post</a></li>
-
-            <li><a href="#" class="flex px-4 py-2 hover:bg-green-50 transition-colors duration-200">Delete this post</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Post Content -->
-    <div class="text-gray-700">
-      <a href="detail.html" class="line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo molestie ultrices. Nam felis urna, convallis vitae risus semper, ultricies varius tortor. Etiam suscipit aliquam neque, a euismod orci molestie sed...</a>
-    </div>
-    
-    <!-- Card preview -->
-    <div class="rounded overflow-hidden bg-gray-100 w-full">
-      <video class="w-full object-cover aspect-video sm:aspect-[16/9] videoTag" 
-       controls playsinline preload="metadata">
-        <source src="static/v01.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    </div>
-
-  
-    <!-- Stats -->
-    <div class="py-3 px-3 flex items-center xs:text-xs lg:text-sm text-gray-500 space-x-3 border-t border-b border-gray-200">
-      <span>12k likes</span>
-      <span>120 comments</span>
-      <span>55 reposts</span>
-    </div>
-
-    <!-- Actions -->
-    <div class="flex justify-around">
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>12k</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" /></svg>120</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" /></svg>40</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" /></svg>35</button>
-    </div>
-  </div>
-</div>
-
-<!-- post 4 -->
-<div class="bg-white md:rounded-xl shadow overflow-hidden">
-  <div class="p-3 sm:p-6 space-y-4">
-    <!-- Post Header -->
-    <div class="flex items-start justify-between rounded-xl transition-colors duration-300">
-      <div class="flex items-center space-x-3">
-        <div class="flex-shrink-0">
-          <img class="w-10 h-10 object-cover object-center rounded-xl border-2 border-white transition-transform duration-300 group-hover:scale-105" src="static/avatar.webp" alt="username">
-        </div>
-        <div>
-          <div class="flex items-center space-x-2">
-            <a href="profile.html" class="font-bold text-sm hover:text-green-600">Derkos Tirel</a>
-            <span class="bg-green-100 text-green-800 rounded-md px-2 py-0.5 text-xs">
-              <a href="#">Repost</a>
-            </span>
-          </div>
-          <div class="flex items-center text-gray-500 text-sm">
-            <span>19 hours, 14 minutes</span>
-            <span class="mx-1">•</span>
-            <span>Followers</span>
+        <div class="bg-white border rounded-2xl p-4">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-md bg-red-50 text-red-600 flex items-center justify-center font-semibold">P</div>
+            <div class="flex-1">
+              <div class="text-sm font-medium">RIP Golden Kitty Awards. Long live Orbit Awards 🚀</div>
+              <div class="mt-3 text-xs text-gray-500 flex items-center gap-4">
+                <div class="inline-flex items-center gap-2">🡅 <span class="font-medium">252</span></div>
+                <div class="inline-flex items-center gap-2">💬 <span class="font-medium">35</span></div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      
-      <!-- Dropdown Button -->
-      <div class="relative">
-        <button id="dropdownButton2" data-dropdown-toggle="dropdownDots2" data-dropdown-placement="bottom-start" class="p-2 text-gray-500 hover:text-gray-700 hover:bg-green-100 rounded-full transition-colors duration-200 font-bold">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" /></svg>
-        </button>
-        
-        <!-- Dropdown Menu -->
-        <div id="dropdownDots2" class="shadow-dropdown hidden z-50 w-48 bg-gray-50 divide-y divide-gray-100 rounded-lg">
-          <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownButton2">
-            <li><a href="#" class="flex px-4 py-2 hover:bg-green-50 transition-colors duration-200">Comment</a></li>
 
-            <li><a href="#" class="flex px-4 py-2 hover:bg-green-50 transition-colors duration-200">Repost</a></li>
-
-            <button type="button" onclick="copyPostURL('{{post.get_absolute_url}}');" class="block px-4 py-2 hover:bg-green-50 text-gray-700 transition-colors duration-200 w-full text-start">Copy link</button>
-
-            <li><a href="" class="flex px-4 py-2 hover:bg-#green-50 transition-colors duration-200">Update this post</a></li>
-
-            <li><a href="#" class="flex px-4 py-2 hover:bg-green-50 transition-colors duration-200">Delete this post</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Post Content -->
-    <div class="text-gray-700">
-      <a href="detail.html" class="line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo molestie ultrices. Nam felis urna, convallis vitae risus semper, ultricies varius tortor. Etiam suscipit aliquam neque, a euismod orci molestie sed...</a>
-    </div>
-  
-    <!-- Stats -->
-    <div class="py-3 px-3 flex items-center xs:text-xs lg:text-sm text-gray-500 space-x-3 border-t border-b border-gray-200">
-      <span>12k likes</span>
-      <span>120 comments</span>
-      <span>55 reposts</span>
-    </div>
-
-    <!-- Actions -->
-    <div class="flex justify-around">
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>12k</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" /></svg>120</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" /></svg>40</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" /></svg>35</button>
-    </div>
-  </div>
-</div>
-
-<!-- post 5 -->
-<div class="bg-white md:rounded-xl shadow overflow-hidden">
-  <div class="p-3 sm:p-6 space-y-4">
-    <!-- Post Header -->
-    <div class="flex items-start justify-between rounded-xl transition-colors duration-300">
-      <div class="flex items-center space-x-3">
-        <div class="flex-shrink-0">
-          <img class="w-10 h-10 object-cover object-center rounded-xl border-2 border-white transition-transform duration-300 group-hover:scale-105" src="static/avatar.webp" alt="username">
-        </div>
-        <div>
-          <div class="flex items-center space-x-2">
-            <a href="profile.html" class="font-bold text-sm hover:text-green-600">Derkos Tirel</a>
-            <span class="bg-green-100 text-green-800 rounded-md px-2 py-0.5 text-xs">
-              <a href="#">Repost</a>
-            </span>
-          </div>
-          <div class="flex items-center text-gray-500 text-sm">
-            <span>19 hours, 14 minutes</span>
-            <span class="mx-1">•</span>
-            <span>Public</span>
+        <div class="bg-white border rounded-2xl p-4">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-md bg-green-50 text-green-600 flex items-center justify-center font-semibold">W</div>
+            <div class="flex-1">
+              <div class="text-sm font-medium">The Vocabulary Myth That's Holding You Back...</div>
+              <div class="mt-3 text-xs text-gray-500 flex items-center gap-4">
+                <div class="inline-flex items-center gap-2">🡅 <span class="font-medium">32</span></div>
+                <div class="inline-flex items-center gap-2">💬 <span class="font-medium">1</span></div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      
-      <!-- Dropdown Button -->
-      <div class="relative">
-        <button id="dropdownButton1" data-dropdown-toggle="dropdownDots1" data-dropdown-placement="bottom-start" class="p-2 text-gray-500 hover:text-gray-700 hover:bg-green-100 rounded-full transition-colors duration-200 font-bold">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" /></svg>
-        </button>
-        
-        <!-- Dropdown Menu -->
-        <div id="dropdownDots1" class="shadow-2xl hidden z-50 w-48 bg-gray-50 divide-y divide-gray-100 rounded">
-          <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownButton1">
-            <li><a href="#" class="flex px-4 py-2 hover:bg-green-50 transition-colors duration-200">Comment</a></li>
 
-            <li><a href="#" class="flex px-4 py-2 hover:bg-green-50 transition-colors duration-200">Repost</a></li>
-
-            <button type="button" onclick="copyPostURL('{{post.get_absolute_url}}');" class="block px-4 py-2 hover:bg-green-50 text-gray-700 transition-colors duration-200 w-full text-start">Copy link</button>
-
-            <li><a href="" class="flex px-4 py-2 hover:bg-#green-50 transition-colors duration-200">Update this post</a></li>
-
-            <li><a href="#" class="flex px-4 py-2 hover:bg-green-50 transition-colors duration-200">Delete this post</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Post Content -->
-    <div class="text-gray-700">
-      <a href="detail.html" class="line-clamp-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum commodo molestie ultrices. Nam felis urna, convallis vitae risus semper, ultricies varius tortor. Etiam suscipit aliquam neque, a euismod orci molestie sed...</a>
-    </div>
-    
-    <!-- Media -->
-    <div class="rounded overflow-hidden bg-gray-100 w-full">
-      <a href="detail.html" class="block w-full h-full">
-        <img class="w-full object-cover aspect-auto sm:aspect-[16/9]" src="static/02.webp" alt="image" loading="eager|lazy"/>
-      </a>
-    </div>
-  
-    <!-- Stats -->
-    <div class="py-3 px-3 flex items-center xs:text-xs lg:text-sm text-gray-500 space-x-3 border-t border-b border-gray-200">
-      <span>12k likes</span>
-      <span>120 comments</span>
-      <span>55 reposts</span>
-    </div>
-
-    <!-- Actions -->
-    <div class="flex justify-around">
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg>12k</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" /></svg>120</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" /></svg>40</button>
-
-      <button class="flex text-sm items-center p-2 rounded-full text-gray-600 hover:bg-green-50 hover:text-green-600 transition-colors duration-200 cursor-pointer"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" /></svg>35</button>
-    </div>
-  </div>
-</div>
-
-
-        </div>
-
-        <div class="col-span-1 sm:px-4 sticky top-0 h-screen hidden md:block">
-          <div class="px-8 py-4">
-            <h3 class="text-xl font-semibold mb-2">Shortcuts</h3>
-            <ul class="space-y-3 text-gray-500 text-sm">
-              <li><a href="profile.html" class="flex hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1">Profile</a></li>
-
-              <li><a href="profile.html" class="flex hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1">Followers</a></li>
-
-              <li><a href="profile.html" class="flex hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1">Bookmarks</a></li>
-
-              <li><a href="profile.html" class="flex hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1">Settings</a></li>
-
-              <li><a href="profile.html" class="flex hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1">About Us</a></li>
-
-              <li><a href="profile.html" class="flex hover:text-green-600 font-semibold transition-all duration-300 hover:translate-x-1">FAQs</a></li>
-            </ul>
+        <div class="bg-white border rounded-2xl p-4">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-md bg-purple-50 text-purple-600 flex items-center justify-center font-semibold">W</div>
+            <div class="flex-1">
+              <div class="text-sm font-medium">Wepost V2 is launching on Product Hunt in three days!</div>
+              <div class="mt-3 text-xs text-gray-500 flex items-center gap-4">
+                <div class="inline-flex items-center gap-2">🡅 <span class="font-medium">27</span></div>
+                <div class="inline-flex items-center gap-2">💬 <span class="font-medium">2</span></div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+
+      </aside>
+    </div>
   </main>
 
-
-
-<div class="fixed bottom-0 w-full h-16 left-0 z-20 bg-white border-t border-gray-200 shadow-md md:hidden">
-    <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
-        <a href="index.html" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-green-50 group text-gray-600 hover:text-green-600">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
-            <span class="text-sm">Home</span>
-        </a>
-
-        <a href="explore.html" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-green-50 group text-gray-600 hover:text-green-600">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
-            <span class="text-sm">Explore</span>
-        </a>
-
-        <a href="new.html" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-green-50 group text-gray-600 hover:text-green-600">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
-        </a>
-
-        <a href="profile.html" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-green-50 group text-gray-600 hover:text-green-600">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
-            <span class="text-sm">Profile</span>
-        </a>
-
-        <a href="settings.html" type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-green-50 group text-gray-600 hover:text-green-600">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" /></svg>
-            <span class="text-sm">Settings</span>
-        </a>
-    </div>
-</div>
-
-
+  <script src="https://unpkg.com/lucide@latest"></script>
   <script>
-    document.getElementById('scroll-left').addEventListener('click', () => {
-      document.getElementById('stories-container').scrollBy({
-        left: -200, // Adjust scrolling distance
-        behavior: 'smooth'
-      });
-    });
-
-    document.getElementById('scroll-right').addEventListener('click', () => {
-      document.getElementById('stories-container').scrollBy({
-        left: 200, // Adjust scrolling distance
-        behavior: 'smooth'
-      });
-    });
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-
-
-  <!-- GLightbox Script -->
-  <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
-
-  <script>
-    // Initialize GLightbox
-    const lightbox = GLightbox({
-      selector: '.glightbox',
-      touchNavigation: true,
-      loop: true,
-      autoplayVideos: true,
-      zoomable: true,
-      plyr: {
-        config: {
-          controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-          hideControls: false
-        }
-      }
-    });
+    lucide.createIcons();
   </script>
 
 </body>

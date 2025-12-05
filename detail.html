@@ -1,456 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ayekwe - Homepage</title>
-  <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
-  <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeChat-Style UI with Tailwind CSS</title>
+  <link rel="stylesheet" type="text/css" href="./static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        '[#07C160]': '#07C160',
+                        'wechat-dark': '#1F1F1F',
+                        'wechat-light': '#F5F5F5',
+                        'wechat-gray': '#EDEDED',
+                        'wechat-bg': '#EEEEEE'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .message-bubble {
+            max-width: 75%;
+        }
+        .sent .message-bubble {
+            border-radius: 18px 4px 18px 18px;
+        }
+        .received .message-bubble {
+            border-radius: 4px 18px 18px 18px;
+        }
+        .tab-active {
+            position: relative;
+        }
+        .tab-active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 3px;
+            background-color: #07C160;
+        }
+        .moment-post {
+            transition: transform 0.2s;
+        }
+        .moment-post:hover {
+            transform: translateY(-2px);
+        }
+        .chat-container {
+            height: calc(100vh - 180px);
+        }
+        @media (min-width: 768px) {
+            .chat-container {
+                height: calc(100vh - 200px);
+            }
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
 </head>
-<body class="font-sans antialiased bg-stone-200 text-gray-900">
-
-  <nav class="bg-white border-b border-gray-200 px-4 py-2.5 fixed left-0 right-0 top-0 z-30">
-    <div class="flex flex-wrap justify-between items-center">
-      <div class="flex justify-start items-center">
-        <button
-          data-drawer-target="drawer-navigation"
-          data-drawer-toggle="drawer-navigation"
-          aria-controls="drawer-navigation"
-          class="p-2 mr-2 text-gray-600 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 focus:bg-gray-100 focus:ring-2 focus:ring-gray-100">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" /></svg>
-
-          <span class="sr-only">Toggle sidebar</span>
-        </button>
-        <a href="index.html" class="flex items-center justify-between mr-4">
-          <span class="self-center text-2xl font-semibold whitespace-nowrap">Ayekwe</span>
-        </a>
-
-        <form action="#" method="GET" class="hidden md:block md:pl-2">
-          <label for="topbar-search" class="sr-only">Search</label>
-          <div class="relative md:w-64 md:w-96">
-            <div
-              class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
-            >
-              <svg
-                class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"></path>
-              </svg>
+<body class="bg-[#EEEEEE]">
+    <!-- Main Container -->
+    <div class="max-w-4xl mx-auto bg-white min-h-screen flex flex-col">
+        <!-- Header -->
+        <div class="bg-[#07C160] text-white p-4 flex items-center justify-between sticky top-0 z-10">
+            <div class="flex items-center space-x-3">
+                <div class="bg-gray-200 border-2 border-dashed rounded-xl w-10 h-10 overflow-hidden">
+                    <img src="static/green-logo.png" class="h-full w-full">
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg">WeChat</h1>
+                    <p class="text-xs opacity-80">Last seen: Just now</p>
+                </div>
             </div>
-            <input
-              type="text"
-              name="email"
-              id="topbar-search"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2.5"
-              placeholder="Search"
-            />
-          </div>
-        </form>
-      </div>
-
-      <div class="flex items-center lg:order-2">
-        <!-- Notifications -->
-        <button type="button" class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-300">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0M3.124 7.5A8.969 8.969 0 0 1 5.292 3m13.416 0a8.969 8.969 0 0 1 2.168 4.5" /></svg>
-        </button>
-
-        <button type="button" class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-300">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" /></svg>
-        </button>
-        
-        <button
-          type="button"
-          class="flex mx-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-          id="user-menu-button"
-          aria-expanded="false"
-          data-dropdown-toggle="dropdown">
-          <span class="sr-only">Open user menu</span>
-          <img
-            class="w-8 h-8 rounded-full"
-            src="static/avatar.jpg"
-            alt="user photo"
-          />
-        </button>
-        <!-- Dropdown menu -->
-        <div
-          class="hidden z-50 my-4 w-56 text-base list-none bg-white rounded divide-y divide-gray-100 shadow rounded-xl"
-          id="dropdown">
-          <div class="py-3 px-4">
-            <span
-              class="block text-sm font-semibold text-gray-900 dark:text-white"
-              >Neil Sims</span
-            >
-            <span
-              class="block text-sm text-gray-900 truncate dark:text-white"
-              >name@flowbite.com</span
-            >
-          </div>
-          <ul
-            class="py-1 text-gray-700 dark:text-gray-300"
-            aria-labelledby="dropdown"
-          >
-            <li>
-              <a
-                href="#"
-                class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
-                >My profile</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white"
-                >Account settings</a
-              >
-            </li>
-          </ul>
-          <ul
-            class="py-1 text-gray-700 dark:text-gray-300"
-            aria-labelledby="dropdown"
-          >
-            <li>
-              <a
-                href="#"
-                class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                ><svg
-                  class="mr-2 w-5 h-5 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-                My likes</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="flex items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                ><svg
-                  class="mr-2 w-5 h-5 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"
-                  ></path>
-                </svg>
-                Collections</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="flex justify-between items-center py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                <span class="flex items-center">
-                  <svg
-                    aria-hidden="true"
-                    class="mr-2 w-5 h-5 text-primary-600 dark:text-primary-500"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z"
-                      clip-rule="evenodd"
-                    ></path>
-                  </svg>
-                  Pro version
-                </span>
-                <svg
-                  aria-hidden="true"
-                  class="w-5 h-5 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                    clip-rule="evenodd"
-                  ></path>
-                </svg>
-              </a>
-            </li>
-          </ul>
-          <ul
-            class="py-1 text-gray-700 dark:text-gray-300"
-            aria-labelledby="dropdown"
-          >
-            <li>
-              <a
-                href="#"
-                class="block py-2 px-4 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >Sign out</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Sidebar -->
-  <!-- drawer component -->
-  <div id="drawer-navigation" class="fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-64" tabindex="-1" aria-labelledby="drawer-navigation-label">
-    <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase">Ayekwe</h5>
-    
-    <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg></button>
-
-    <div class="py-4 overflow-y-auto">
-      <ul class="space-y-2 font-medium">
-        <li>
-          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
-            <span class="ms-3">Home</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
-            <span class="ms-3">Pages</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
-            <span class="ms-3">Explore</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" /></svg>
-            <span class="ms-3">People</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" /></svg>
-            <span class="ms-3">Bookmarks</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" /></svg>
-            <span class="ms-3">Profile</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 13.5V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 0 1 0 3m0-3a1.5 1.5 0 0 0 0 3m0 9.75V10.5" /></svg>
-            <span class="ms-3">Settings</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="m10.5 21 5.25-11.25L21 21m-9-3h7.5M3 5.621a48.474 48.474 0 0 1 6-.371m0 0c1.12 0 2.233.038 3.334.114M9 5.25V3m3.334 2.364C11.176 10.658 7.69 15.08 3 17.502m9.334-12.138c.896.061 1.785.147 2.666.257m-4.589 8.495a18.023 18.023 0 0 1-3.827-5.802" /></svg>
-            <span class="ms-3">Language</span>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" /></svg>
-            <span class="ms-3">FAQs</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-
-
-    <!-- Main -->
-    <main class="p-2 sm:p-4 h-auto pt-20 sm:pt-20">
-      <div class="max-w-xl mx-auto space-y-3 mb-4">
-
-        <div class="p-4 bg-white shadow rounded-lg space-y-2">
-          <div class="flex items-center space-x-3 mb-2">
-            <img src="static/avatar.jpg" alt="username" class="size-8 rounded-full">
-            <div>
-              <span class="text-base font-semibold">Derkos</span>
-              <span class="text-sm text-gray-500">Jan 30, 2025</span>
+            <div class="flex space-x-4">
+                <i class="fas fa-search"></i>
+                <i class="fas fa-plus"></i>
             </div>
-          </div>
-
-          <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat...</div>
-
-          <div>
-            <a href="#">
-              <img src="static/car.jpg" alt="image" class="w-full rounded-lg">
-            </a>
-          </div>
-
-          <div class="space-x-2 text-gray-500">
-            <span>3k likes</span>,
-            <span>500 comments</span>,
-            <span>Repost from Derkos</span>
-          </div>
-
-          <hr>
-
-          <div class="flex justify-between py-1">
-            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg></a>
-
-            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.068.157 2.148.279 3.238.364.466.037.893.281 1.153.671L12 21l2.652-3.978c.26-.39.687-.634 1.153-.67 1.09-.086 2.17-.208 3.238-.365 1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" /></svg></a>
-
-            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" /></svg></a>
-
-            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"><path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" /></svg></a>
-          </div>
-
-          <hr>
-
-          <div class="mt-6 py-3 px-3 bg-stone-100 rounded-lg">
-            <!-- Comment Form -->
-            <form class="submit-form mt-3 space-y-2" action="#" method="POST">
-              <textarea type="text" name="comment" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-3" placeholder="Leave comment..."></textarea>
-
-              <button type="submit" class="submit-button bg-blue-500 hover:bg-blue-600 text-white px-3 py-2 rounded-lg font-medium text-sm text-center">Comment</button>
-            </form>
-
-            <!-- Comments List -->
-            <ul class="mt-4 divide-y divide-gray-300">
-              <li class="py-3">
-                <div class="flex items-start space-x-2">
-                  <img src="static/avatar.jpg" alt="Comment Author" class="w-8 h-8 rounded-full border-2 border-gray-300">
-                  <div>
-                    <h5 class="text-sm font-medium">Derkos <span class="ml-2 text-xs text-gray-500">Jan 30, 2025</span></h5>
-                    <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                    <div class="flex justify-between text-gray-500 mt-3">
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></a>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <!-- more -->
-              <li class="py-3">
-                <div class="flex items-start space-x-2">
-                  <img src="static/avatar.jpg" alt="Comment Author" class="w-8 h-8 rounded-full border-2 border-gray-300">
-                  <div>
-                    <h5 class="font-medium">Derkos <span class="ml-2 text-xs text-gray-500">Jan 30, 2025</span></h5>
-                    <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                    <div class="flex justify-between text-gray-500 mt-3">
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></a>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="py-3">
-                <div class="flex items-start space-x-2">
-                  <img src="static/avatar.jpg" alt="Comment Author" class="w-8 h-8 rounded-full border-2 border-gray-300">
-                  <div>
-                    <h5 class="font-medium">Derkos <span class="ml-2 text-xs text-gray-500">Jan 30, 2025</span></h5>
-                    <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                    <div class="flex justify-between text-gray-500 mt-3">
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></a>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="py-3">
-                <div class="flex items-start space-x-2">
-                  <img src="static/avatar.jpg" alt="Comment Author" class="w-8 h-8 rounded-full border-2 border-gray-300">
-                  <div>
-                    <h5 class="font-medium">Derkos <span class="ml-2 text-xs text-gray-500">Jan 30, 2025</span></h5>
-                    <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                    <div class="flex justify-between text-gray-500 mt-3">
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></a>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="py-3">
-                <div class="flex items-start space-x-2">
-                  <img src="static/avatar.jpg" alt="Comment Author" class="w-8 h-8 rounded-full border-2 border-gray-300">
-                  <div>
-                    <h5 class="font-medium">Derkos <span class="ml-2 text-xs text-gray-500">Jan 30, 2025</span></h5>
-                    <p class="text-gray-700">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                    <div class="flex justify-between text-gray-500 mt-3">
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" /></svg></a>
-
-                      <a href="#"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg></a>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-
-          </div>
         </div>
 
-      </div>
-    </main>
-  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/tailwind-scrollbar-hide@2.0.0/dist/index.min.js"></script>
+        <!-- Tab Navigation -->
+        <div class="flex bg-white border-b border-gray-200 sticky top-16 z-10">
+            <button data-tab="chats" class="flex-1 text-center py-3 relative tab-active tab-btn">
+                <span class="font-medium">Chats</span>
+            </button>
+            <button data-tab="contacts" class="flex-1 text-center py-3 text-gray-500 tab-btn">
+                <span>Contacts</span>
+            </button>
+            <button data-tab="discover" class="flex-1 text-center py-3 text-gray-500 tab-btn">
+                <span>Discover</span>
+            </button>
+            <button data-tab="me" class="flex-1 text-center py-3 text-gray-500 tab-btn">
+                <span>Me</span>
+            </button>
+        </div>
+
+        <!-- Tab Content Container -->
+        <div class="flex-1 overflow-y-auto chat-container">
+            <!-- Chats Tab -->
+            <div id="chats-tab" class="tab-content p-4 active">
+                <h2 class="font-bold text-gray-700 mb-4">Recent Chats</h2>
+                
+                <!-- Chat list -->
+                <div class="space-y-3">
+                    <div class="flex items-center p-2 hover:bg-[#EDEDED] rounded-lg cursor-pointer">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12"></div>
+                        <div class="ml-3 flex-1 min-w-0">
+                            <div class="flex justify-between">
+                                <h3 class="font-semibold truncate">Mom</h3>
+                                <span class="text-xs text-gray-500 whitespace-nowrap pl-2">10:30 AM</span>
+                            </div>
+                            <p class="text-sm text-gray-600 truncate">Did you eat lunch yet? Let me know when you're coming home</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-2 hover:bg-[#EDEDED] rounded-lg cursor-pointer">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12"></div>
+                        <div class="ml-3 flex-1 min-w-0">
+                            <div class="flex justify-between">
+                                <h3 class="font-semibold truncate">Work Group</h3>
+                                <span class="text-xs text-gray-500 whitespace-nowrap pl-2">9:45 AM</span>
+                            </div>
+                            <p class="text-sm text-gray-600 truncate">Meeting at 2PM today in Conference Room B</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-2 hover:bg-[#EDEDED] rounded-lg cursor-pointer">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12"></div>
+                        <div class="ml-3 flex-1 min-w-0">
+                            <div class="flex justify-between">
+                                <h3 class="font-semibold truncate">David</h3>
+                                <span class="text-xs text-gray-500 whitespace-nowrap pl-2">Yesterday</span>
+                            </div>
+                            <p class="text-sm text-gray-600 truncate">Thanks for the help with the project!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-2 hover:bg-[#EDEDED] rounded-lg cursor-pointer">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12"></div>
+                        <div class="ml-3 flex-1 min-w-0">
+                            <div class="flex justify-between">
+                                <h3 class="font-semibold truncate">Sarah</h3>
+                                <span class="text-xs text-gray-500 whitespace-nowrap pl-2">Yesterday</span>
+                            </div>
+                            <p class="text-sm text-gray-600 truncate">Movie tonight? New Marvel film just released</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-2 hover:bg-[#EDEDED] rounded-lg cursor-pointer">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12"></div>
+                        <div class="ml-3 flex-1 min-w-0">
+                            <div class="flex justify-between">
+                                <h3 class="font-semibold truncate">Fitness Group</h3>
+                                <span class="text-xs text-gray-500 whitespace-nowrap pl-2">10/05</span>
+                            </div>
+                            <p class="text-sm text-gray-600 truncate">Yoga session moved to 7PM tomorrow</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Active Chat -->
+                <h2 class="font-bold text-gray-700 mt-8 mb-4">Active Chat</h2>
+                <div class="bg-[#EDEDED] rounded-xl p-4">
+                    <div class="space-y-4">
+                        <!-- Received message -->
+                        <div class="flex received">
+                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-8 h-8 mr-2 flex-shrink-0"></div>
+                            <div class="message-bubble bg-white p-3">
+                                <p>Hey, are we still meeting for lunch? I found a great new place downtown.</p>
+                                <span class="text-xs text-gray-500 block text-right mt-1">12:05 PM</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Sent message -->
+                        <div class="flex justify-end sent">
+                            <div class="message-bubble bg-[#07C160] text-white p-3">
+                                <p>Yes! I'll be there in 10 minutes. Just finishing up a call.</p>
+                                <span class="text-xs opacity-80 block text-right mt-1">12:06 PM <i class="fas fa-check ml-1"></i></span>
+                            </div>
+                        </div>
+                        
+                        <!-- Received message -->
+                        <div class="flex received">
+                            <div class="bg-gray-200 border-2 border-dashed rounded-xl w-8 h-8 mr-2 flex-shrink-0"></div>
+                            <div class="message-bubble bg-white p-3">
+                                <p>Great! I ordered already. They have amazing sushi 😊</p>
+                                <span class="text-xs text-gray-500 block text-right mt-1">12:07 PM</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Sent message -->
+                        <div class="flex justify-end sent mt-4">
+                            <div class="message-bubble bg-[#07C160] text-white p-3">
+                                <p>Perfect! Can't wait to try it. See you soon!</p>
+                                <span class="text-xs opacity-80 block text-right mt-1">12:08 PM <i class="fas fa-check ml-1"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Message input -->
+                    <div class="mt-4 flex items-center">
+                        <button class="bg-white rounded-full w-10 h-10 flex items-center justify-center text-gray-500">
+                            <!-- <i class="fas fa-plus"></i> -->
+                            ➕
+                        </button>
+                        <div class="flex-1 bg-white rounded-full py-2 px-4 flex items-center mx-2">
+                            <span class="text-gray-500 mr-2">😊</span>
+                            <input type="text" placeholder="Type a message" class="flex-1 outline-none bg-transparent">
+                        </div>
+                        <button class="bg-[#07C160] rounded-full w-10 h-10 flex items-center justify-center text-white">
+                            <!-- <i class="fas fa-microphone"></i> -->
+                            🎙
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contacts Tab -->
+            <div id="contacts-tab" class="tab-content p-4">
+                <h2 class="font-bold text-gray-700 mb-4">Contacts</h2>
+                
+                <!-- Search bar -->
+                <div class="bg-[#EDEDED] rounded-full px-4 py-2 flex items-center mb-4">
+                    <i class="fas fa-search text-gray-500 mr-2"></i>
+                    <input type="text" placeholder="Search contacts" class="flex-1 outline-none bg-transparent">
+                </div>
+                
+                <!-- Contacts list -->
+                <div class="space-y-3">
+                    <div class="flex items-center p-2 hover:bg-[#EDEDED] rounded-lg cursor-pointer">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12"></div>
+                        <div class="ml-3 flex-1">
+                            <h3 class="font-semibold">Mom</h3>
+                            <p class="text-xs text-gray-600">Family</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-2 hover:bg-[#EDEDED] rounded-lg cursor-pointer">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12"></div>
+                        <div class="ml-3 flex-1">
+                            <h3 class="font-semibold">David</h3>
+                            <p class="text-xs text-gray-600">Co-worker</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-2 hover:bg-[#EDEDED] rounded-lg cursor-pointer">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12"></div>
+                        <div class="ml-3 flex-1">
+                            <h3 class="font-semibold">Sarah</h3>
+                            <p class="text-xs text-gray-600">Friend</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-2 hover:bg-[#EDEDED] rounded-lg cursor-pointer">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12"></div>
+                        <div class="ml-3 flex-1">
+                            <h3 class="font-semibold">John</h3>
+                            <p class="text-xs text-gray-600">University</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Groups section -->
+                <h2 class="font-bold text-gray-700 mt-6 mb-4">Groups</h2>
+                <div class="space-y-3">
+                    <div class="flex items-center p-2 hover:bg-[#EDEDED] rounded-lg cursor-pointer">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12"></div>
+                        <div class="ml-3 flex-1">
+                            <h3 class="font-semibold">Work Group</h3>
+                            <p class="text-xs text-gray-600">You: Meeting at 2PM today</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-2 hover:bg-[#EDEDED] rounded-lg cursor-pointer">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12"></div>
+                        <div class="ml-3 flex-1">
+                            <h3 class="font-semibold">Family Group</h3>
+                            <p class="text-xs text-gray-600">Mom: Dinner this Sunday</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center p-2 hover:bg-[#EDEDED] rounded-lg cursor-pointer">
+                        <div class="bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12"></div>
+                        <div class="ml-3 flex-1">
+                            <h3 class="font-semibold">Fitness Group</h3>
+                            <p class="text-xs text-gray-600">Mike: Yoga session moved</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Discover Tab -->
+            <div id="discover-tab" class="tab-content p-4">
+                <h2 class="font-bold text-gray-700 mb-4">Discover</h2>
+                
+                <div class="bg-white rounded-xl overflow-hidden">
+                    <!-- Moments -->
+                    <div class="p-4 border-b border-gray-200 flex items-center cursor-pointer hover:bg-[#EDEDED]">
+                        <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-orange-500">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="font-medium">Moments</h3>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                    
+                    <!-- Channels -->
+                    <div class="p-4 border-b border-gray-200 flex items-center cursor-pointer hover:bg-[#EDEDED]">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
+                            <i class="fas fa-broadcast-tower"></i>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="font-medium">Channels</h3>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                    
+                    <!-- Live -->
+                    <div class="p-4 border-b border-gray-200 flex items-center cursor-pointer hover:bg-[#EDEDED]">
+                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="font-medium">Live</h3>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                    
+                    <!-- Mini Programs -->
+                    <div class="p-4 border-b border-gray-200 flex items-center cursor-pointer hover:bg-[#EDEDED]">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                            <i class="fas fa-grid-2"></i>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="font-medium">Mini Programs</h3>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                    
+                    <!-- Games -->
+                    <div class="p-4 flex items-center cursor-pointer hover:bg-[#EDEDED]">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-500">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="font-medium">Games</h3>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <!-- Moments Section -->
+                <h2 class="font-bold text-gray-700 mt-8 mb-4">Recent Moments</h2>
+                <div class="grid grid-cols-3 gap-2">
+                    <img src="static/01.webp" alt="" class="moment-post aspect-square bg-gray-200 border-2 border-dashed rounded-xl">
+                    <img src="static/02.webp" alt="" class="moment-post aspect-square bg-gray-200 border-2 border-dashed rounded-xl">
+                    <img src="static/03.webp" alt="" class="moment-post aspect-square bg-gray-200 border-2 border-dashed rounded-xl">
+                    <img src="static/04.webp" alt="" class="moment-post aspect-square bg-gray-200 border-2 border-dashed rounded-xl">
+                    <img src="static/05.webp" alt="" class="moment-post aspect-square bg-gray-200 border-2 border-dashed rounded-xl">
+                    <img src="static/06.webp" alt="" class="moment-post aspect-square bg-gray-200 border-2 border-dashed rounded-xl">
+                </div>
+            </div>
+            
+            <!-- Me Tab -->
+            <div id="me-tab" class="tab-content p-4">
+                <!-- Profile header -->
+                <div class="flex items-center p-4 bg-white rounded-xl shadow-sm mb-6">
+                    <div class="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 overflow-hidden">
+                        <img src="static/me.webp" class="h-full w-full">
+                    </div>
+                    <div class="ml-4">
+                        <h2 class="font-bold text-lg">Alex Chen</h2>
+                        <p class="text-sm text-gray-600">WeChat ID: alexchen2023</p>
+                    </div>
+                    <div class="ml-auto">
+                        <!-- <i class="fas fa-qrcode text-gray-500 text-xl"></i> -->
+                        👩‍💻
+                    </div>
+                </div>
+                
+                <!-- Wallet section -->
+                <div class="bg-white rounded-xl overflow-hidden mb-6">
+                    <div class="p-4 border-b border-gray-200 flex items-center cursor-pointer hover:bg-[#EDEDED]">
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="font-medium">Wallet</h3>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                    
+                    <div class="p-4 border-b border-gray-200 flex items-center cursor-pointer hover:bg-[#EDEDED]">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="font-medium">Favorites</h3>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                    
+                    <div class="p-4 border-b border-gray-200 flex items-center cursor-pointer hover:bg-[#EDEDED]">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-500">
+                            <i class="fas fa-photo-video"></i>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="font-medium">My Posts</h3>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+                
+                <!-- Settings section -->
+                <div class="bg-white rounded-xl overflow-hidden">
+                    <div class="p-4 border-b border-gray-200 flex items-center cursor-pointer hover:bg-[#EDEDED]">
+                        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="font-medium">Settings</h3>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                    
+                    <div class="p-4 flex items-center cursor-pointer hover:bg-[#EDEDED]">
+                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="ml-4 flex-1">
+                            <h3 class="font-medium">Switch to Dark Mode</h3>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="bg-white border-t border-gray-200 py-2 flex justify-around sticky bottom-0 z-10">
+            <button data-tab="chats" class="text-center text-[#07C160] tab-btn">
+                <i class="fas fa-comment text-xl"></i>
+                <p class="text-xs mt-1">Chats</p>
+            </button>
+            <button data-tab="contacts" class="text-center text-gray-500 tab-btn">
+                <i class="fas fa-address-book text-xl"></i>
+                <p class="text-xs mt-1">Contacts</p>
+            </button>
+            <button data-tab="discover" class="text-center text-gray-500 tab-btn">
+                <i class="fas fa-compass text-xl"></i>
+                <p class="text-xs mt-1">Discover</p>
+            </button>
+            <button data-tab="me" class="text-center text-gray-500 tab-btn">
+                <i class="fas fa-user text-xl"></i>
+                <p class="text-xs mt-1">Me</p>
+            </button>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div class="fixed bottom-20 right-4 md:bottom-6 md:right-6 w-14 h-14 rounded-full bg-[#07C160] flex items-center justify-center text-white shadow-lg">
+        <!-- <i class="fas fa-plus text-xl"></i> -->
+        ➕
+    </div>
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                
+                // Update active tab
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('text-[#07C160]', 'tab-active');
+                    btn.classList.add('text-gray-500');
+                });
+                
+                this.classList.add('text-[#07C160]', 'tab-active');
+                this.classList.remove('text-gray-500');
+                
+                // Update tab navigation
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                
+                document.getElementById(`${tabId}-tab`).classList.add('active');
+            });
+        });
+    </script>
 </body>
 </html>
